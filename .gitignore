@@ -1,0 +1,9 @@
+# Ignore virtual environment folder
+venv/
+
+# Ignore PyCharm files
+.idea/
+__pycache__/
+*.iml
+*.iws
+*.ipr

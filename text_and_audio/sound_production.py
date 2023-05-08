@@ -1,6 +1,7 @@
 from gtts import gTTS
 from pydub import AudioSegment
 from pydub.playback import play
+from os import remove
 
 
 def text_to_speech(text: str):
@@ -10,3 +11,5 @@ def text_to_speech(text: str):
 
     sound = AudioSegment.from_mp3(file)
     play(sound)
+
+    remove(file)

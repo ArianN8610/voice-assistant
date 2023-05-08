@@ -7,3 +7,8 @@ __pycache__/
 *.iml
 *.iws
 *.ipr
+
+# Ignore folder and files
+dontDeleteMe/
+text_and_audio/__pycache__/
+abilities/__pycache__/

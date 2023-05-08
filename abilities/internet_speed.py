@@ -1,4 +1,5 @@
 import speedtest
+from text_and_audio.print_speech import print_and_speech
 
 
 def internet_amount_conversion(speed) -> str:
@@ -15,6 +16,8 @@ def internet_amount_conversion(speed) -> str:
 
 
 def get_internet_speed() -> str:
+    print_and_speech('Calculating...')
+
     try:
         st = speedtest.Speedtest()
         download = internet_amount_conversion(st.download())
@@ -23,6 +26,6 @@ def get_internet_speed() -> str:
         result = f"Download: {download}\n" \
                  f"Upload: {upload}"
 
-        return result
+        print_and_speech(result)
     except speedtest.ConfigRetrievalError:
-        return 'No internet connection'
+        print_and_speech('No internet connection')

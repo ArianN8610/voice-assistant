@@ -2,25 +2,29 @@ import os
 import ctypes
 import time
 import asyncio
+import sys
 
 # Install required programs
 from install_required_things import setup
 
-# Text and audio
-from text_and_audio.sound_production import text_to_speech
-from text_and_audio.audio_conversion import speech_to_text
-from text_and_audio.print_speech import print_and_speech
+try:
+    # Text and audio
+    from text_and_audio.sound_production import text_to_speech
+    from text_and_audio.audio_conversion import speech_to_text
+    from text_and_audio.print_speech import print_and_speech
 
-# Abilities
-from abilities.date_time import date_and_time
-from abilities.internet_speed import get_internet_speed
-from abilities.translation import text_translation
-from abilities.search import search
-from abilities.photo_and_video import take_photo, take_video, screenshot, screen_recorder
-from abilities.music import play_random_music, play_music, edit_music_folder, playlist
-from abilities.note import write_note, show_notes, delete_notes
-from abilities.username import get_username, change_username
-from abilities.ai import ai
+    # Abilities
+    from abilities.date_time import date_and_time
+    from abilities.internet_speed import get_internet_speed
+    from abilities.translation import text_translation
+    from abilities.search import search
+    from abilities.photo_and_video import take_photo, take_video, screenshot, screen_recorder
+    from abilities.music import play_random_music, play_music, edit_music_folder, playlist
+    from abilities.note import write_note, show_notes, delete_notes
+    from abilities.username import get_username, change_username
+    from abilities.ai import ai
+except ModuleNotFoundError:
+    pass
 
 # The folder where the data is stored
 dire = 'dontDeleteMe'
@@ -40,6 +44,7 @@ def dont_listen():
 
 def main():
     setup()
+    os.execl(sys.executable, sys.executable, *sys.argv)
     get_username()
 
     while True:

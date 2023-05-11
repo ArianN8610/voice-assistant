@@ -14,6 +14,7 @@ def install(install_list: list, install_program: str, program_name: str):
                 print('Installing...')
                 subprocess.run(['powershell', '-Command', install_program])
                 print('The install was done successfully.\n')
+                break
             elif ask in ('no', 'n'):
                 print('The program is over')
                 exit()

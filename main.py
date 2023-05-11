@@ -4,7 +4,7 @@ import time
 import asyncio
 
 # Install required programs
-from install_required_programs import install
+from install_required_things import setup
 
 # Text and audio
 from text_and_audio.sound_production import text_to_speech
@@ -39,14 +39,14 @@ def dont_listen():
 
 
 def main():
-    install()
+    setup()
     get_username()
 
     while True:
         print('Listening...')
         query = speech_to_text('en').lower()
 
-        if query != 'exit':
+        if query not in ('exit', 'none'):
             print(f'You said: {query}')
 
         if query == 'exit':
@@ -116,7 +116,8 @@ def main():
         elif query == 'persian ai':
             asyncio.run(ai('fa'))
         else:
-            print_and_speech("Sorry, I didn't understand")
+            if query != 'none':
+                print_and_speech("Sorry, I didn't understand")
 
 
 if __name__ == '__main__':

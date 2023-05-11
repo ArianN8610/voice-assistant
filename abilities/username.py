@@ -6,6 +6,9 @@ dire = 'dontDeleteMe'
 
 
 def get_username():
+    if not os.path.exists(dire):
+        os.mkdir(dire)
+
     txt_file = f'{dire}/username.txt'
 
     if os.path.exists(txt_file):
@@ -15,9 +18,13 @@ def get_username():
 
     print_and_speech("Hello, welcome to Voice AI. I'm your voice assistant. To start, please tell me your name...")
     username = speech_to_text('en')
-    with open(txt_file, 'w') as f:
-        f.write(username)
-    print_and_speech(f'Hi {username}, nice to meet you. How can I help you? Say "help" to see my features.\n')
+
+    if username != 'None':
+        with open(txt_file, 'w') as f:
+            f.write(username)
+        print_and_speech(f'Hi {username}, nice to meet you. How can I help you? Say "help" to see my features.\n')
+    else:
+        get_username()
 
 
 def change_username():

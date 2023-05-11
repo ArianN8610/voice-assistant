@@ -23,7 +23,7 @@ def install(install_list: list, install_program: str, program_name: str):
 def py310():
     py_version = subprocess.run(['py', '--list'], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-    if '-V:3.10' not in py_version:
+    if '3.10' not in py_version:
         ask = input('To use the voice assistant, you need to install python 3.10. Do you want to install it? '
                     '([Y]es/[N]o): ').lower()
 

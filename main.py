@@ -2,7 +2,6 @@ import os
 import ctypes
 import time
 import asyncio
-import sys
 
 # Install required programs
 from install_required_things import setup
@@ -44,7 +43,6 @@ def dont_listen():
 
 def main():
     setup()
-    os.execl(sys.executable, sys.executable, *sys.argv)
     get_username()
 
     while True:

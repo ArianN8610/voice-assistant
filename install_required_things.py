@@ -1,5 +1,9 @@
 import subprocess
 import os
+import sys
+
+dire = 'dontDeleteMe'
+txt_file = f'{dire}/restart.txt'
 
 
 def install(install_list: list, install_program: str, program_name: str):
@@ -41,7 +45,22 @@ def py310():
             os.system('pip install -r requirements.txt')
 
 
+def restart():
+    if not os.path.exists(dire):
+        os.mkdir(dire)
+
+    with open(txt_file, 'w') as f:
+        f.write('True')
+
+    os.execl(sys.executable, sys.executable, *sys.argv)
+
+
 def setup():
+    if os.path.exists(txt_file):
+        with open(txt_file, 'r') as f:
+            if f.read() == 'True':
+                return
+
     install(['choco', '-v'], 'Set-ExecutionPolicy Bypass -Scope Process -Force; '
                              '[System.Net.ServicePointManager]::SecurityProtocol = '
                              '[System.Net.ServicePointManager]::SecurityProtocol '
@@ -51,3 +70,10 @@ def setup():
 
     install(['ffmpeg', '-version'], 'choco install ffmpeg', 'ffmpeg')
     py310()
+
+    if os.path.exists(txt_file):
+        with open(txt_file, 'r') as f:
+            if f.read() != 'True':
+                restart()
+    else:
+        restart()

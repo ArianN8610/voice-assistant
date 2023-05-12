@@ -16,6 +16,7 @@ def get_username():
             if f.read().strip() != '':
                 return
 
+    print('\n')
     print_and_speech("Hello, welcome to Voice AI. I'm your voice assistant. To start, please tell me your name...")
     username = speech_to_text('en')
 

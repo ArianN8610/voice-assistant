@@ -16,7 +16,9 @@ def install(install_list: list, install_program: str, program_name: str):
 
             if ask in ('yes', 'y'):
                 print('Installing...')
-                subprocess.run(['powershell', '-Command', install_program])
+                subprocess.run(["powershell", "-Command", "Start-Process", "powershell", "-ArgumentList",
+                                f"'-ExecutionPolicy', 'Bypass', '-Command', '{install_program}'",
+                                "-Verb", "runAs"])
                 print('The install was done successfully.\n')
                 break
             elif ask in ('no', 'n'):
@@ -33,7 +35,9 @@ def py310():
 
         if ask in ('yes', 'y'):
             print('Installing...')
-            subprocess.run(['powershell', '-Command', 'choco install python --version=3.10.10'])
+            subprocess.run(["powershell", "-Command", "Start-Process", "powershell", "-ArgumentList",
+                            "'-ExecutionPolicy', 'Bypass', '-Command', 'choco install python --version=3.10.10'",
+                            "-Verb", "runAs"])
             print('The install was done successfully.\n')
         elif ask in ('no', 'n'):
             print('The program is over')

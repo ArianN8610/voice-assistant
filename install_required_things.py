@@ -6,7 +6,7 @@ dire = 'dontDeleteMe'
 txt_file = f'{dire}/restart.txt'
 
 
-def install(install_list: list, install_program: str, program_name: str):
+def install(install_list: list, install_program: str, program_name: str, admin: bool):
     try:
         subprocess.check_call(install_list, stdout=subprocess.DEVNULL)
     except FileNotFoundError:
@@ -16,10 +16,13 @@ def install(install_list: list, install_program: str, program_name: str):
 
             if ask in ('yes', 'y'):
                 print('Installing...')
-                subprocess.run(["powershell", "-Command", "Start-Process", "powershell", "-ArgumentList",
-                                f"'-ExecutionPolicy', 'Bypass', '-Command', '{install_program}'",
-                                "-Verb", "runAs"])
-                print('The install was done successfully.\n')
+                if admin:
+                    subprocess.run(["powershell", "-Command", "Start-Process", "powershell", "-ArgumentList",
+                                    f"'-ExecutionPolicy', 'Bypass', '-Command', '{install_program}'",
+                                    "-Verb", "runAs"])
+                else:
+                    subprocess.run(['powershell', '-Command', install_program])
+                print('The install was done successfully\n')
                 break
             elif ask in ('no', 'n'):
                 print('The program is over')
@@ -38,7 +41,7 @@ def py310():
             subprocess.run(["powershell", "-Command", "Start-Process", "powershell", "-ArgumentList",
                             "'-ExecutionPolicy', 'Bypass', '-Command', 'choco install python --version=3.10.10'",
                             "-Verb", "runAs"])
-            print('The install was done successfully.\n')
+            print('The install was done successfully\n')
         elif ask in ('no', 'n'):
             print('The program is over')
             exit()
@@ -70,9 +73,10 @@ def setup():
                              '[System.Net.ServicePointManager]::SecurityProtocol '
                              '-bor 3072; iex '
                              '((New-Object System.Net.WebClient).DownloadString'
-                             "('https://community.chocolatey.org/install.ps1'))", 'chocolatey')
+                             "('https://community.chocolatey.org/install.ps1'))", 'chocolatey', False)
 
-    install(['ffmpeg', '-version'], 'choco install ffmpeg', 'ffmpeg')
+    install(['ffmpeg', '-version'], 'choco install ffmpeg', 'ffmpeg', True)
+    install(['git', '-v'], 'choco install git.install', 'git', True)
     py310()
 
     if os.path.exists(txt_file):

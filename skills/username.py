@@ -1,6 +1,7 @@
 from text_and_audio.print_speech import print_and_speech
 from text_and_audio.audio_conversion import speech_to_text
 import os
+from update import get_version
 
 dire = 'dontDeleteMe'
 
@@ -16,16 +17,17 @@ def get_username():
             if f.read().strip() != '':
                 return
 
-    print('\n')
-    print_and_speech("Hello, welcome to Voice AI. I'm your voice assistant. To start, please tell me your name...")
+    print_and_speech("\nHello, welcome to Voice AI. I'm your voice assistant. To start, please tell me your name...")
     username = speech_to_text('en')
 
     if username != 'None':
         with open(txt_file, 'w') as f:
             f.write(username)
-        print_and_speech(f'Hi {username}, nice to meet you. How can I help you? Say "help" to see my features.\n')
+        print_and_speech(f'Hi {username}, nice to meet you. How can I help you? Say "help" to see my features.')
     else:
         get_username()
+
+    get_version()
 
 
 def change_username():

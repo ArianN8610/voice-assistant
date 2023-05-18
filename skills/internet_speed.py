@@ -15,7 +15,7 @@ def internet_amount_conversion(speed) -> str:
     return speed_wit_units
 
 
-def get_internet_speed() -> str:
+def get_internet_speed():
     print_and_speech('Calculating...')
 
     try:

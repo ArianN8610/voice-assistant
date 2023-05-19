@@ -24,7 +24,7 @@ try:
     from skills.sleep import sleep_voice_ai, dont_listen
     from skills.password import set_passwd, check_passwd, change_passwd
 
-    from update import check_update
+    from update import check_update, get_first_version
 except ModuleNotFoundError:
     pass
 
@@ -35,6 +35,7 @@ dire = 'dontDeleteMe'
 def main():
     setup()
     get_username()
+    get_first_version()
     check_passwd()
     check_update(True)
 
@@ -52,10 +53,10 @@ def main():
             print_and_speech('You can see my skills below')
             print('exit, (play random music, play random song), (edit songs folder, edit song folder, '
                   'edit music folder), (play music, play song), play playlist, edit playlist, date and time, '
-                  'change my name, search, lock screen, shutdown, restart, sleep device, don\'t listen, take a photo, '
-                  'screenshot, take a video, screen record, write a note, show notes, delete notes, internet speed, '
-                  'english to persian translation, persian to english translation, english ai, persian ai, sleep voice '
-                  'ai, set password, change password, check update, say my name')
+                  'change my name, search, lock screen, shutdown, restart, sleep device, hibernate, don\'t listen, '
+                  'take a photo, screenshot, take a video, screen record, write a note, show notes, delete notes, '
+                  'internet speed, english to persian translation, persian to english translation, english ai, '
+                  'persian ai, sleep voice ai, set password, change password, check update, say my name')
         elif query == 'play random music' or query == 'play random song':
             play_random_music()
         elif query == 'edit songs folder' or query == 'edit song folder' or query == 'edit music folder':

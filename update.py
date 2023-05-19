@@ -16,18 +16,25 @@ master_version = f'{dire}/master_version.txt'
 develop_version = f'{dire}/develop_version.txt'
 
 
-def get_version():
+def get_version(main: bool = True, beta: bool = True):
     response_master = requests.get(master).json()
     response_develop = requests.get(develop).json()
 
     if 'message' not in response_master or 'message' not in response_develop:
-        if not os.path.exists(master_version):
+        if main:
             with open(master_version, 'w') as f:
                 f.write(str(len(response_master)))
 
-        if not os.path.exists(develop_version):
+        if beta:
             with open(develop_version, 'w') as f:
                 f.write(str(len(response_develop)))
+
+
+def get_first_version():
+    if not os.path.exists(master_version):
+        get_version(True, False)
+    if not os.path.exists(develop_version):
+        get_version(False, True)
 
 
 def get_update(branch: str):
@@ -83,8 +90,17 @@ def check_update(start: bool = False):
                 run_update('Beta version of the app is available. Do you want to get it? ', 'develop',
                            len(response_develop))
             else:
-                if not start:
-                    print_and_speech('There are no updates')
+                if main_version > len(response_master) or beta_version > len(response_develop):
+                    if main_version > len(response_master):
+                        get_version(True, False)
+
+                    if beta_version > len(response_develop):
+                        get_version(False, True)
+
+                    check_update(start)
+                else:
+                    if not start:
+                        print_and_speech('There are no updates')
         else:
             if not start:
                 print_and_speech("Sorry, you're not able to receive the update now. Please try again later")

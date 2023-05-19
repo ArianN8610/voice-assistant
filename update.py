@@ -54,7 +54,7 @@ def run_update(message: str, branch: str, version: int):
             subprocess.call(['git', 'checkout', branch])
             print_and_speech('The program has been successfully updated')
 
-            with open(f'{dire}/{branch}_version', 'w') as f:
+            with open(f'{dire}/{branch}_version.txt', 'w') as f:
                 f.write(str(version))
 
             os.execl(sys.executable, sys.executable, *sys.argv)

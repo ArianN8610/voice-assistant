@@ -125,7 +125,7 @@ def main():
         elif query == 'check update':
             check_update()
         elif query == 'say my name':
-            with open(f'{dire}/username', 'r') as f:
+            with open(f'{dire}/username.txt', 'r') as f:
                 print_and_speech(f"You're {f.read()}")
         else:
             if query != 'none':

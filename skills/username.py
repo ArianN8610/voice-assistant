@@ -3,13 +3,12 @@ from text_and_audio.audio_conversion import speech_to_text
 import os
 
 dire = 'dontDeleteMe'
+txt_file = f'{dire}/username.txt'
 
 
 def get_username():
     if not os.path.exists(dire):
         os.mkdir(dire)
-
-    txt_file = f'{dire}/username.txt'
 
     if os.path.exists(txt_file):
         with open(txt_file, 'r') as f:
@@ -28,8 +27,6 @@ def get_username():
 
 
 def change_username():
-    txt_file = f'{dire}/username.txt'
-
     print_and_speech('Please tell me your new name...')
     new_username = speech_to_text('en')
     with open(txt_file, 'w') as f:

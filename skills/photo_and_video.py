@@ -10,19 +10,31 @@ now = datetime.now().strftime('%Y-%m-%d %H%M%S')
 
 
 def take_photo():
-    result, pic = cam.read()
+    if cam.isOpened():
+        result, pic = cam.read()
 
-    if result:
-        dire = 'photos'
+        if result:
+            dire = 'photos'
 
-        if not os.path.exists(dire):
-            os.mkdir(dire)
+            if not os.path.exists(dire):
+                os.mkdir(dire)
 
-        cv2.imwrite(f"{dire}/photo {now}.jpg", pic)
-        cam.release()
-        print_and_speech(f'The photo was successfully saved in the {dire} folder')
+            print_and_speech('You can save the photo by pressing the "s" key')
+
+            while True:
+                result, pic = cam.read()
+                cv2.imshow('Video', pic)
+
+                if cv2.waitKey(1) & 0xFF == ord('s'):
+                    cv2.imwrite(f"{dire}/photo {now}.jpg", pic)
+                    cam.release()
+                    break
+
+            print_and_speech(f'The photo was successfully saved in the {dire} folder')
+        else:
+            print_and_speech('Something went wrong. Please try again')
     else:
-        print_and_speech('Something went wrong. Please try again')
+        print_and_speech("Can't open the camera")
 
 
 def take_video():

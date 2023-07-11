@@ -7,8 +7,8 @@ from install_required_things import setup
 
 try:
     # Text and audio
-    from text_and_audio.sound_production import text_to_speech
-    from text_and_audio.audio_conversion import speech_to_text
+    from text_and_audio.tts import text_to_speech
+    from text_and_audio.stt import speech_to_text
     from text_and_audio.print_speech import print_and_speech
 
     # Skills
@@ -24,7 +24,7 @@ try:
     from skills.sleep import sleep_voice_ai, dont_listen
     from skills.password import set_passwd, check_passwd, change_passwd
 
-    from update import check_update, get_first_version
+    from update import check_update
 except ModuleNotFoundError:
     pass
 
@@ -35,9 +35,7 @@ dire = 'dontDeleteMe'
 def main():
     setup()
     get_username()
-    get_first_version()
     check_passwd()
-    check_update(True)
 
     while True:
         print('\nListening...')
@@ -60,13 +58,13 @@ def main():
         elif query == 'play random music' or query == 'play random song':
             play_random_music()
         elif query == 'edit songs folder' or query == 'edit song folder' or query == 'edit music folder':
-            edit_music_folder('random_music.txt')
+            edit_music_folder('random_music')
         elif query == 'play music' or query == 'play song':
             play_music()
         elif query == 'play playlist':
             playlist()
         elif query == 'edit playlist':
-            edit_music_folder('playlist.txt')
+            edit_music_folder('playlist')
         elif query == 'date and time':
             date_and_time()
         elif query == 'change my name':
@@ -125,7 +123,7 @@ def main():
         elif query == 'check update':
             check_update()
         elif query == 'say my name':
-            with open(f'{dire}/username.txt', 'r') as f:
+            with open(f'{dire}/username', 'r') as f:
                 print_and_speech(f"You're {f.read()}")
         else:
             if query != 'none':

@@ -1,8 +1,8 @@
 import os
 from text_and_audio.print_speech import print_and_speech
-from text_and_audio.sound_production import text_to_speech
+from text_and_audio.tts import text_to_speech
 
-txt_file = 'dontDeleteMe/password.txt'
+txt_file = 'dontDeleteMe/password'
 
 
 def set_passwd():

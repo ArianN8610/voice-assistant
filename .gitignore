@@ -12,3 +12,4 @@ __pycache__/
 dontDeleteMe/
 text_and_audio/__pycache__/
 skills/__pycache__/
+push.py

@@ -1,5 +1,5 @@
-from text_and_audio.sound_production import text_to_speech
-from text_and_audio.audio_conversion import speech_to_text
+from text_and_audio.tts import text_to_speech
+from text_and_audio.stt import speech_to_text
 from text_and_audio.print_speech import print_and_speech
 import time
 

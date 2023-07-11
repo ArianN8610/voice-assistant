@@ -1,9 +1,9 @@
 from text_and_audio.print_speech import print_and_speech
-from text_and_audio.audio_conversion import speech_to_text
+from text_and_audio.stt import speech_to_text
 from datetime import datetime
 import os
 
-txt_file = 'dontDeleteMe/notes.txt'
+txt_file = 'dontDeleteMe/notes'
 
 
 def write_note():

@@ -1,7 +1,7 @@
 import re
 from EdgeGPT import Chatbot, ConversationStyle
 from text_and_audio.print_speech import print_and_speech
-from text_and_audio.audio_conversion import speech_to_text
+from text_and_audio.stt import speech_to_text
 
 
 async def ai(lang: str):

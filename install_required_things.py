@@ -2,8 +2,6 @@ import subprocess
 import os
 import sys
 
-dire = 'dontDeleteMe'
-txt_file = f'{dire}/restart.txt'
 need_to_restart = False
 
 
@@ -74,6 +72,6 @@ def setup():
                              '((New-Object System.Net.WebClient).DownloadString'
                              "('https://community.chocolatey.org/install.ps1'))", 'chocolatey', False)
     install(['ffmpeg', '-version'], 'choco install ffmpeg', 'ffmpeg', True)
-    install(['git', '-v'], 'choco install git.install', 'git', True)
+    install(['git', '--version'], 'choco install git.install', 'git', True)
     py310()
     restart()

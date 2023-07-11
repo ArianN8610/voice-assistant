@@ -1,6 +1,6 @@
 import os
 from text_and_audio.print_speech import print_and_speech
-from text_and_audio.sound_production import text_to_speech
+from text_and_audio.tts import text_to_speech
 from random import choice
 from pydub import AudioSegment
 from pydub.playback import play
@@ -9,7 +9,7 @@ dire = 'dontDeleteMe'
 
 
 def play_random_music():
-    txt_file = f'{dire}/random_music.txt'
+    txt_file = f'{dire}/random_music'
 
     if os.path.exists(txt_file):
         with open(txt_file, 'r') as f:
@@ -61,7 +61,7 @@ def play_music():
 
 
 def play_song_from_playlist(song, delete_song=''):
-    txt_file = f'{dire}/playlist.txt'
+    txt_file = f'{dire}/playlist'
 
     if os.path.isdir(song):
         if delete_song != '':
@@ -95,7 +95,7 @@ def play_song_from_playlist(song, delete_song=''):
 
 
 def playlist():
-    txt_file = f'{dire}/playlist.txt'
+    txt_file = f'{dire}/playlist'
 
     if os.path.exists(txt_file):
         with open(txt_file, 'r') as f:

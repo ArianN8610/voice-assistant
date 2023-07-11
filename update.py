@@ -48,8 +48,8 @@ def git_init():
 
 
 def get_public_versions():
-    public_main_version = urllib.request.urlopen(public_main_file).read().decode('utf-8')
-    public_beta_version = urllib.request.urlopen(public_beta_file).read().decode('utf-8')
+    public_main_version = int(urllib.request.urlopen(public_main_file).read().decode('utf-8'))
+    public_beta_version = int(urllib.request.urlopen(public_beta_file).read().decode('utf-8'))
 
     return public_main_version, public_beta_version
 

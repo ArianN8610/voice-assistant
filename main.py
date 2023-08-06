@@ -23,6 +23,7 @@ try:
     from skills.ai import ai
     from skills.sleep import sleep_voice_ai, dont_listen
     from skills.password import set_passwd, check_passwd, change_passwd
+    from skills.mode import mode
 
     from update import check_update
 except ModuleNotFoundError:
@@ -30,6 +31,7 @@ except ModuleNotFoundError:
 
 # The folder where the data is stored
 dire = 'dontDeleteMe'
+file_mode = f'{dire}/mode'
 
 
 def main():
@@ -38,10 +40,17 @@ def main():
     check_passwd()
 
     while True:
-        print('\nListening...')
+        if os.path.exists(file_mode):
+            with open(file_mode, 'r') as f:
+                ai_mode = f.read()
+        else:
+            ai_mode = 'speaking mode'
+
+        if ai_mode == 'speaking mode':
+            print('\nListening...')
         query = speech_to_text('en').lower()
 
-        if query not in ('exit', 'none'):
+        if query not in ('exit', 'none') and ai_mode == 'speaking mode':
             print(f'You said: {query}')
 
         if query == 'exit':
@@ -125,6 +134,10 @@ def main():
         elif query == 'say my name':
             with open(f'{dire}/username', 'r') as f:
                 print_and_speech(f"You're {f.read()}")
+        elif query == 'typing mode':
+            mode(query)
+        elif query == 'speaking mode':
+            mode(query)
         else:
             if query != 'none':
                 print_and_speech("Sorry, I didn't understand")

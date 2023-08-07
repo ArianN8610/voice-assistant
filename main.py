@@ -63,7 +63,8 @@ def main():
                   'change my name, search, lock screen, shutdown, restart, sleep device, hibernate, don\'t listen, '
                   'take a photo, screenshot, take a video, screen record, write a note, show notes, delete notes, '
                   'internet speed, english to persian translation, persian to english translation, english ai, '
-                  'persian ai, sleep voice ai, set password, change password, check update, say my name')
+                  'persian ai, sleep voice ai, set password, change password, check update, say my name, typing mode,'
+                  'speaking mode')
         elif query == 'play random music' or query == 'play random song':
             play_random_music()
         elif query == 'edit songs folder' or query == 'edit song folder' or query == 'edit music folder':

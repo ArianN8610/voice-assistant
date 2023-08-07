@@ -42,8 +42,10 @@ def get_update(branch: str):
 
 
 def git_init():
-    subprocess.run(['git', 'init'])
-    subprocess.run(['git', 'branch', 'develop'])
+    if not os.path.exists('.git'):
+        subprocess.run(['git', 'init'])
+    if 'develop' not in subprocess.getoutput('git branch').lower():
+        subprocess.run(['git', 'branch', 'develop'])
 
 
 def get_public_versions():
